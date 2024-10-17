@@ -1,0 +1,51 @@
+---
+title: Mini-curso de finanças com R
+author: "seu nome"
+date: today
+format: html
+execute: 
+  echo: true
+
+---
+
+# Instruções
+
+OBS 1 - Caso você não tenha o R instalado em sua máquina, você pode acompanhar o curso através do site: [Ambiente Posit Cloud](https://posit.cloud/content/8286998).
+
+OBS 2 - Caso esteja trabalhando no seu computador, você pode instalar os pacotes necessários para o curso e depois carregar as bibliotecas com o código abaixo:
+
+
+
+```{r instalação dos pacotes}
+#| message: false
+#| error: false
+
+pacotes <- c("tidyverse", "quantmod", "timetk", "plotly", "PerformanceAnalytics","DT")
+purrr::walk(pacotes, library, character.only = TRUE)
+```
+
+Exercícios
+
+1. Suponha que uma ação caia 50% e depois suba 50%, de quanto foi a variação total no período? dica (Componha o retorno destes dois períodos utilizando juros compostos.)
+
+```{r}
+
+```
+
+2. Determinado agente possui uma carteira formada pelas seguintes posições: R\$25000,00 no ativo A e R\$50000,00 no ativo B.
+
+Quais os pesos de sua carteira?
+
+Se para a manutenção destas posições o agente tivesse emprestado R\$40000,00 ao Banco X, qual seria a estrutura dos pesos de sua carteira?
+
+```{r}
+
+```
+
+3. Selecione uma carteira adicionando pelo menos 6 ativos que supere o IBOV em resultados com no máximo 20% a mais de risco. 
+
+```{r}
+
+```
+
+4. Crie um dashboard com os gráficos com seus dados e gráficos com base na carteira selecionada.
