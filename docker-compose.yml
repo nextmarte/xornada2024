@@ -1,0 +1,8 @@
+services:
+  quarto:
+    build: .
+    volumes:
+      - .:/workspace
+    ports:
+      - "8787:8787"
+    container_name: quarto_project

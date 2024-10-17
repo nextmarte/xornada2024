@@ -1,0 +1,11 @@
+{
+  "name": "R Quarto Dev Container",
+  "context": "..",
+  "dockerFile": "../Dockerfile",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": ["REditorSupport.r", "quarto.quarto", "ms-python.python"],
+  "forwardPorts": [8787]
+}
