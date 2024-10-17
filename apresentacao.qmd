@@ -1,15 +1,15 @@
 ---
-title:  Mini-Curso - Explorando finanças com R 
+title:  PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R
 author:
-  - name: Marcus Ramalho & Ariel Levy
+  - name: Marcus Ramalho, Ariel Levy e Eduardo Camilo
 format:
   revealjs:
       incremental: false
       transition: slide
       background-transition: fade
       theme: night
-      header: VIII SER - Seminário Internacional de Estatística com R
-      header-logo: images/ser.png
+      header: XI Xornada de Usuarios de R en Galicia
+      header-logo: https://www.r-users.gal/sites/default/files/logoweb_2.png
       logo: images/uff.png
       
 filters:
@@ -22,11 +22,6 @@ execute:
   echo: true
 ---
 
-```{r}
-#| echo: false
-library(countdown)
-```
-
 ## Ariel Levy
 
 ::: {style="display: flex; justify-content: space-between;"}
@@ -37,9 +32,11 @@ library(countdown)
 
 ::: {.column width="70%"}
 
-
+<p style="text-align: justify;">
 
 Doutor em Economia (Universidade Federal Fluminense - 2013), mestre em Administração (IBMEC -2003) e engenheiro eletricista (Universidade Federal Fluminense - 1982). Sou Professor Associado da Universidade Federal Fluminense vinculado ao Departamento de Administração da Faculdade de Administração e Ciências Contábeis e fui coordenador do Curso de Graduação em Administração (2016-2021). Professor do quadro permanente do PPGAd - UFF e colaborador no MBA de Logística (LOGEMP - UFF), no MBA de Finanças (UFF), no MBA de Marketing (UFF) e dos cursos de Extensão em Ciências dos Dados (UFF) como atual coordenador. Possui experiência em Administração, com ênfase em Finanças Quantitativas; Finanças publicas; Planejamento e Controle: Ciências dos Dados: na linguagem R e na análise e visualização de dados. Organizador dos Seminários de Estatística R - Evento Internacional de Divulgação de Aplicações e Desenvolvimento de Linguagens R. Coordenador do Grupo de Pesquisa (CNPQ/UFF) - Métodos Quantitativos Aplicados à Administração.
+
+</p>
 
 
 
@@ -57,11 +54,38 @@ Doutor em Economia (Universidade Federal Fluminense - 2013), mestre em Administr
 ::: {.column width="70%"}
 
 
-Possui graduação em Administração pela Universidade Federal Fluminense (2020) e é candidato ao título de mestre em Administração pelo programa de pós-graduação em administração da UFF (PPGAd-UFF). É professor convidado dos MBAs de Ciências de Dados e de Finanças Corporativas e Mercados de Capitais na UFF. Tem experiência em ciência de dados com R e Python, programação funcional e desenvolvimento de bots, mapeamento e automação de processos administrativos. Tem interesse em Administração da Informação, Gestão do Conhecimento Pessoal, Economia Política, Finanças, R e Python.
+<p style="text-align: justify;">
 
+  Possui mestrado e graduação em Administração pela Universidade Federal Fluminense (UFF), atua como professor nos cursos de formação executiva em Ciências de Dados e Finanças Corporativas e Mercados de Capitais na mesma instituição. Paralelamente, exerce a função de cientista de dados e desenvolvedor de sistemas no projeto Lagoa Viva (UFF/Maricá, RJ). Tem experiência em ciência de dados com R e Python, programação funcional, desenvolvimento de sistemas com Django, visualização de dados e automação de processos administrativos com Python, R e VBA. Seus interesses acadêmicos e profissionais incluem Administração da Informação, Desenvolvimento de sistemas, Economia Política e Finanças, R, Python.
+
+</p>
 
 :::
 :::
+
+## Eduardo Camilo
+
+::: columns
+::: {.column width="30%"}
+![](images/camilo.png)
+:::
+
+::: {.column width="70%}
+
+<p style="text-align: justify;">
+
+Doutor em Administração pelo Instituto COPPEAD da UFRJ (2009) e Professor Associado da Universidade Federal Fluminense, onde vem pesquisando nas áreas de Microestrutura de Mercado, Finanças Comportamentais e Inteligência Analítica. Graduado em Engenharia Eletrônica pelo Instituto Militar de Engenharia (1987). Possui certificação CAP® (Certified Analytics Professional). Possui experiência como executivo na área financeira de grandes empresas e consultor em Finanças e Inteligência Analítica. Também leciona nas áreas de Finanças, Métodos Quantitativos, Varejo e Informática em diversas instituições. Autor do livro Finanças Comportamentais - Pessoas Inteligentes Também Perdem Dinheiro na Bolsa de Valores, publicado pela editora Atlas em 2009.
+
+</p>
+
+:::
+
+:::
+
+
+
+
+
 
 ## Sumário
 
@@ -83,7 +107,8 @@ Possui graduação em Administração pela Universidade Federal Fluminense (2020
 
 9.  Índice sharpe
 
-10. Aprender a criar um dashboard com seus dados e gráficos.
+10. Otmização de carteiras de ativos
+
 
 ## Relembrando conceitos de finanças
 
@@ -172,28 +197,6 @@ Retorno Linear = $\frac{P_{t} - P_{t-1}}{P_{t-1}}$
 
 Retorno Logarítmico = $ln(\frac{P_{t}}{P_{t-1}})$
 
-## Exercícios
-
-::: panel-tabset
-## Exercício 1
-
-`r countdown(minutes = 5, seconds = 00)`
-
-1. Suponha que uma ação caia 50% e depois suba 50%, de quanto foi a variação total no período? dica (Componha o retorno destes dois períodos utilizando juros compostos.)
-
-## " "
-
-```{r}
-
-valor_inicial <- 100
-valor_apos_queda <- valor_inicial - (valor_inicial * 0.50)
-valor_final <- valor_apos_queda + (valor_apos_queda * 0.50)
-
-variacao_total <- (valor_final - valor_inicial) / valor_inicial
-variacao_total
-
-```
-:::
 
 ## Transformar os preços diários em mensais e obter os retornos.
 
@@ -364,60 +367,7 @@ head(portfolio_returns_xts,3)
 ```
 :::
 
-## Exercícios
 
-::: panel-tabset
-## Exercício 2
-
-`r countdown(minutes = 10, seconds = 00)`
-
-2. Determinado agente possui uma carteira formada pelas seguintes posições: R\$25000,00 no ativo A e R\$50000,00 no ativo B.
-
-Quais os pesos de sua carteira?
-
-Se para a manutenção destas posições o agente tivesse emprestado R\$40000,00 ao Banco X, qual seria a estrutura dos pesos de sua carteira?
-
-## ""
-
-::: columns
-::: column
-```{r}
-# Valores das posições
-ativo_A <- 25000
-ativo_B <- 50000
-
-# Valor total da carteira
-total <- ativo_A + ativo_B
-
-# Pesos
-peso_A <- ativo_A / total
-peso_B <- ativo_B / total
-
-peso_A
-peso_B
-
-```
-:::
-
-::: column
-```{r}
-emprestimo <- -40000
-
-total <- total + emprestimo
-
-peso_A <- ativo_A / total
-peso_B <- ativo_B / total
-emprestimo <- emprestimo / total
-
-peso_A
-peso_B
-emprestimo
-
-sum(peso_A, peso_B, emprestimo)
-```
-:::
-:::
-:::
 
 ## Visualizar o retorno da carteira.
 
@@ -654,13 +604,8 @@ sharpe_ativos %>% head()
 
 ```
 
-## Exercício 
 
-3. Selecione uma carteira adicionando pelo menos 6 ativos que supere o IBOV em resultados com no máximo 20% a mais de risco. 
 
-4. Crie um dashboard com os gráficos com seus dados e gráficos com base na carteira selecionada.
-
-`r countdown(minutes = 30, seconds = 00)`
 
 ## Contato
 
@@ -673,3 +618,8 @@ sharpe_ativos %>% head()
     -   [GitHub](https://github.com/alevy59)
     -   E-mail: alevy@id.uff.br
     -   linkedin: [Ariel Levy](https://www.linkedin.com/in/ariel-levy-3623136/)
+
+-  Eduardo Camilo:
+    -   [GitHub](https://github.com/eduardo-camilo)
+    -   E-mail: ecamilo@id.uff.br
+    -  linkedin: [Eduardo Camilo](https://www.linkedin.com/in/eduardo-camilo-da-silva-dsc-cap%C2%AE-a9801416/?originalSubdomain=br)

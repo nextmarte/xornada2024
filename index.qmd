@@ -25,7 +25,7 @@ Neste curso você aprenderá a utilizar o R para análise de dados financeiros. 
 
 9.  Índice sharpe
 
-10. Aprender a criar um dashboard com seus dados e gráficos.
+
 
 ## Pré-requisitos
 
