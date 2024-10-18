@@ -604,8 +604,72 @@ sharpe_ativos %>% head()
 
 ```
 
+## Função de utilidade quadrática
+
+A função de utilidade quadrática é usada na otimização de portfólios para maximizar o retorno esperado e minimizar o risco.
+
+$$U = \mu^T w - \lambda \sigma^2$$
+
+onde:
+- $U$: função de utilidade
+- $\mu^T$: vetor de retornos esperados
+- $w$: vetor de pesos dos ativos
+- $\lambda$: fator de aversão ao risco
+
+Generalizando para o caso de $n$ ativos, a função de utilidade quadrática é dada por:
+
+$$U = \mu^T w - \lambda w^T \Sigma w$$
+
+onde:
+- $\Sigma$: matriz de covariância dos retornos dos ativos
+- $w^T$: vetor transposto de pesos dos ativos
+- $w$: vetor de pesos dos ativos
+- $\lambda$: fator de aversão ao risco
+- $\mu$: vetor de retornos esperados
+- $U$: função de utilidade
 
 
+## Otimização de portfólios
+
+A otimização de portfólios é um problema de maximização da função de utilidade quadrática sujeita a restrições, como a soma dos pesos dos ativos deve ser igual a 1 e os pesos dos ativos devem ser maiores ou iguais a zero.
+
+## Passos para otimização de portfólios com o pacote PortfolioAnalytics
+
+1. Criar o obejto de portfólio
+2. Adicionar restrições
+3. Adicionar a função objetivo
+4. Resolver o problema de otimização
+5. Visualizar os resultados
+6. Exibir os pesos dos ativos
+7. Plotar a distribuição dos pesos na carteira otimizada
+
+## Exemplo prático - Criação do objeto de portfólio
+
+```{r}
+library(PortfolioAnalytics)
+
+port_spec <- portfolio.spec(assets = colnames(asset_returns_xts))
+
+class(port_spec)
+
+```
+
+## Adicionando restrições
+
+ ```{r}
+ 
+ # Adicionando restrições, como por exemplo, a soma dos pesos dos ativos deve ser igual a 1
+
+port_spec  <- add.constraint(port_spec, type = "weight_sum", min_sum = 1, max_sum = 1)
+
+# adicionnando uma restrição de caixas para os pesos dos ativos
+
+port_spec <- add.constraint(port_spec, type = "box", min = c(0.2, 0.1, 0.1, 0.1, 0.1), max = 0.4)
+
+
+port_spec
+ 
+ ```
 
 ## Contato
 
