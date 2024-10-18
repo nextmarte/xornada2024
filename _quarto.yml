@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: docs
 
+r:
+  path: C:\Program Files\R\R-4.4.1
+
 website:
   favicon: images/ser.png
   title: "Mini-Curso - Explorando finanças com R"

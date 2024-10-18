@@ -109,7 +109,7 @@
     "href": "apresentacao.html#importar-os-preços-dos-ativos-da-internet-direto-do-yahoo.com",
     "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
     "section": "Importar os preços dos ativos da internet direto do yahoo.com",
-    "text": "Importar os preços dos ativos da internet direto do yahoo.com\n\nFundamentuscarregar pacotes e selecionar ativosImportar preços dos ativosPrices\n\n\n\n\n\n\n\n\n\n## pacote utilizados\npacotes &lt;- c(\"tidyverse\", \"quantmod\", \"timetk\", \"plotly\", \"PerformanceAnalytics\")\npurrr::walk(pacotes, library, character.only = TRUE)\n\n# Ativos escolhidos\ntickers &lt;- c(\"VALE3.SA\",\"PETR4.SA\",\"CMIG4.SA\",\"RADL3.SA\",\"ITUB4.SA\",\"^BVSP\")\n\n# w &lt;- c(0.15, 0.25, 0.1, 0.2, 0.3)\n\n\n\n\nO Formato XTS\n\n\nprices_raw &lt;- \n  getSymbols(tickers, \n             src = 'yahoo', \n             from = \"2019-12-31\",\n             to = \"2024-05-31\",\n             auto.assign = TRUE, #obs auto asign carrega os resultados para o ambiente\n             warnings = FALSE,)\n\nprices&lt;-prices_raw %&gt;%             \n  map(~Ad(get(.))) %&gt;% \n  reduce(merge) %&gt;%\n  `colnames&lt;-`(tickers)\n\n\n\n\nprices %&gt;%\n  tk_tbl() %&gt;%\n  head()\n\n# A tibble: 6 × 7\n  index      VALE3.SA PETR4.SA CMIG4.SA RADL3.SA ITUB4.SA `^BVSP`\n  &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n1 2020-01-02     35.1     10.6     3.82     21.0     30.9  118573\n2 2020-01-03     34.9     10.5     3.78     20.6     30.6  117707\n3 2020-01-06     34.7     10.7     3.83     20.2     30.1  116878\n4 2020-01-07     34.9     10.6     3.97     19.9     29.4  116662\n5 2020-01-08     34.9     10.6     4.08     20.2     29.0  116247\n6 2020-01-09     34.5     10.5     4.05     20.8     28.4  115947"
+    "text": "Importar os preços dos ativos da internet direto do yahoo.com\n\nFundamentuscarregar pacotes e selecionar ativosImportar preços dos ativosPrices\n\n\n\n\n\n\n\n\n\n## pacote utilizados\npacotes &lt;- c(\"tidyverse\", \"quantmod\", \"timetk\", \"plotly\", \"PerformanceAnalytics\")\npurrr::walk(pacotes, library, character.only = TRUE)\n\n# Ativos escolhidos\ntickers &lt;- c(\"VALE3.SA\",\"PETR4.SA\",\"CMIG4.SA\",\"RADL3.SA\",\"ITUB4.SA\",\"^BVSP\")\n\n# w &lt;- c(0.15, 0.25, 0.1, 0.2, 0.3)\n\n\n\n\nO Formato XTS\n\n\nprices_raw &lt;- \n  getSymbols(tickers, \n             src = 'yahoo', \n             from = \"2019-12-31\",\n             to = \"2024-05-31\",\n             auto.assign = TRUE, #obs auto asign carrega os resultados para o ambiente\n             warnings = FALSE,)\n\nprices&lt;-prices_raw %&gt;%             \n  map(~Ad(get(.))) %&gt;% \n  reduce(merge) %&gt;%\n  `colnames&lt;-`(tickers)\n\n\n\n\nprices %&gt;%\n  tk_tbl() %&gt;%\n  head()\n\n# A tibble: 6 × 7\n  index      VALE3.SA PETR4.SA CMIG4.SA RADL3.SA ITUB4.SA `^BVSP`\n  &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n1 2020-01-02     35.1     10.6     4.08     21.0     30.9  118573\n2 2020-01-03     34.9     10.5     4.04     20.6     30.6  117707\n3 2020-01-06     34.7     10.7     4.10     20.2     30.2  116878\n4 2020-01-07     34.9     10.6     4.25     19.9     29.5  116662\n5 2020-01-08     34.9     10.6     4.36     20.2     29.0  116247\n6 2020-01-09     34.5     10.5     4.33     20.8     28.4  115947"
   },
   {
     "objectID": "apresentacao.html#retornos-de-um-ativo",
@@ -130,7 +130,7 @@
     "href": "apresentacao.html#transformar-os-preços-diários-em-mensais-e-obter-os-retornos.",
     "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
     "section": "Transformar os preços diários em mensais e obter os retornos.",
-    "text": "Transformar os preços diários em mensais e obter os retornos.\n\nPreços mensaisRetornos mensais\n\n\n\nprices_monthly &lt;- xts::to.monthly(prices, indexAt = \"lastof\", OHLC = FALSE)\n\nhead(prices_monthly)\n\n           VALE3.SA PETR4.SA CMIG4.SA RADL3.SA ITUB4.SA  ^BVSP\n2020-01-31 32.50481 9.842993 4.111793 22.77023 26.67758 113761\n2020-02-29 28.65105 8.767012 3.839506 21.97835 26.42989 104172\n2020-03-31 27.94625 4.840193 2.450573 18.69379 19.07977  73020\n2020-04-30 29.00669 6.244852 2.618345 19.24321 18.82758  80506\n2020-05-31 34.27005 7.037137 2.970392 20.09904 19.06338  87403\n2020-06-30 36.15813 7.455765 3.030899 20.34320 21.07114  95056\n\n\n\n\n\nasset_returns_xts &lt;-\n PerformanceAnalytics::Return.calculate(prices_monthly, \n                   method = \"discrete\") %&gt;% \n  na.omit()\nhead(asset_returns_xts)\n\n              VALE3.SA    PETR4.SA    CMIG4.SA    RADL3.SA     ITUB4.SA\n2020-02-29 -0.11855978 -0.10931443 -0.06622091 -0.03477673 -0.009284725\n2020-03-31 -0.02459957 -0.44790842 -0.36174783 -0.14944529 -0.278098942\n2020-04-30  0.03794571  0.29020707  0.06846218  0.02939068 -0.013217349\n2020-05-31  0.18145330  0.12687010  0.13445403  0.04447394  0.012524269\n2020-06-30  0.05509442  0.05948843  0.02037030  0.01214802  0.105319988\n2020-07-31  0.08565819  0.03018316  0.08892915  0.12185854  0.057204785\n                 ^BVSP\n2020-02-29 -0.08429075\n2020-03-31 -0.29904389\n2020-04-30  0.10251986\n2020-05-31  0.08567063\n2020-06-30  0.08755992\n2020-07-31  0.08264602"
+    "text": "Transformar os preços diários em mensais e obter os retornos.\n\nPreços mensaisRetornos mensais\n\n\n\nprices_monthly &lt;- xts::to.monthly(prices, indexAt = \"lastof\", OHLC = FALSE)\n\nhead(prices_monthly)\n\n           VALE3.SA PETR4.SA CMIG4.SA RADL3.SA ITUB4.SA  ^BVSP\n2020-01-31 32.50481 9.842995 4.399584 22.77023 26.70970 113761\n2020-02-29 28.65105 8.767011 4.108241 21.97835 26.42989 104172\n2020-03-31 27.94626 4.840193 2.622093 18.69379 19.07976  73020\n2020-04-30 29.00668 6.244852 2.801608 19.24321 18.82757  80506\n2020-05-31 34.27004 7.037135 3.178294 20.09904 19.06338  87403\n2020-06-30 36.15813 7.455766 3.243038 20.34319 21.07114  95056\n\n\n\n\n\nasset_returns_xts &lt;-\n PerformanceAnalytics::Return.calculate(prices_monthly, \n                   method = \"discrete\") %&gt;% \n  na.omit()\nhead(asset_returns_xts)\n\n              VALE3.SA    PETR4.SA    CMIG4.SA    RADL3.SA    ITUB4.SA\n2020-02-29 -0.11855984 -0.10931470 -0.06622063 -0.03477698 -0.01047625\n2020-03-31 -0.02459910 -0.44790842 -0.36174790 -0.14944507 -0.27809898\n2020-04-30  0.03794514  0.29020720  0.06846243  0.02939037 -0.01321755\n2020-05-31  0.18145332  0.12686980  0.13445361  0.04447435  0.01252468\n2020-06-30  0.05509442  0.05948892  0.02037052  0.01214764  0.10532019\n2020-07-31  0.08565810  0.03018296  0.08892931  0.12185876  0.05720459\n                 ^BVSP\n2020-02-29 -0.08429075\n2020-03-31 -0.29904389\n2020-04-30  0.10251986\n2020-05-31  0.08567063\n2020-06-30  0.08755992\n2020-07-31  0.08264602"
   },
   {
     "objectID": "apresentacao.html#visualização-dos-dados",
@@ -151,7 +151,7 @@
     "href": "apresentacao.html#retorno-da-carteira.",
     "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
     "section": "Retorno da carteira.",
-    "text": "Retorno da carteira.\n\nPesos dos ativosRetorno da carteira\n\n\nO somatório dos pesos deve ser igual a 1.\n\nset.seed(1234) \nw &lt;- runif(5) # Gerando 4 pesos aleatórios\nw &lt;- w / sum(w) # Normalizando os pesos para que a soma seja 1\nw\n\n[1] 0.04018396 0.21992701 0.21532396 0.22030871 0.30425636\n\n\nO cálculo do retorno de uma carteira depende do retorno de cada ativo e de seu peso na carteira e pode ser obtido pela média ponderada:\n\\[ \\bar{k}=\\sum_{i=i}^n{w_i*k_i}\\]\n\n\n\n# removendo o índice do IBOV da lista de ativos para calcular o retorno da carteira\nretorno_ativos &lt;- asset_returns_xts[, tickers[1:5]]\n\nportfolio_returns_xts&lt;-PerformanceAnalytics::Return.portfolio(retorno_ativos,\n                 weights = w,\n                 rebalance_on = \"months\",\n                 type= \"discrete\",\n                 verbose = FALSE) %&gt;% \n  `colnames&lt;-`(\"CARTEIRA\")\nhead(portfolio_returns_xts,3)\n\n              CARTEIRA\n2020-02-29 -0.05355090\n2020-03-31 -0.29492612\n2020-04-30  0.08254429"
+    "text": "Retorno da carteira.\n\nPesos dos ativosRetorno da carteira\n\n\nO somatório dos pesos deve ser igual a 1.\n\nset.seed(1234) \nw &lt;- runif(5) # Gerando 4 pesos aleatórios\nw &lt;- w / sum(w) # Normalizando os pesos para que a soma seja 1\nw\n\n[1] 0.04018396 0.21992701 0.21532396 0.22030871 0.30425636\n\n\nO cálculo do retorno de uma carteira depende do retorno de cada ativo e de seu peso na carteira e pode ser obtido pela média ponderada:\n\\[ \\bar{k}=\\sum_{i=i}^n{w_i*k_i}\\]\n\n\n\n# removendo o índice do IBOV da lista de ativos para calcular o retorno da carteira\nretorno_ativos &lt;- asset_returns_xts[, tickers[1:5]]\n\nportfolio_returns_xts&lt;-PerformanceAnalytics::Return.portfolio(retorno_ativos,\n                 weights = w,\n                 rebalance_on = \"months\",\n                 type= \"discrete\",\n                 verbose = FALSE) %&gt;% \n  `colnames&lt;-`(\"CARTEIRA\")\nhead(portfolio_returns_xts,3)\n\n              CARTEIRA\n2020-02-29 -0.05391348\n2020-03-31 -0.29492608\n2020-04-30  0.08254422"
   },
   {
     "objectID": "apresentacao.html#exercícios-1",
@@ -179,14 +179,14 @@
     "href": "apresentacao.html#beta",
     "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
     "section": "Beta",
-    "text": "Beta\n\nBeta da carteira e de cada ativo.Beta vs RetornoGráfico - Beta vs Retorno\n\n\n\n# Calculando o beta do portfólio e de cada ativo\n\nbeta_long &lt;- PerformanceAnalytics::CAPM.beta(cbind(asset_returns_xts, portfolio_returns_xts), asset_returns_xts$'^BVSP', Rf = 0) %&gt;%\n  as.data.frame() %&gt;%\n  rownames_to_column(var = \"indice\") %&gt;%\n  pivot_longer(cols = -indice, names_to = \"Ativo\", values_to = \"beta\") %&gt;%\n  select(-indice) %&gt;% \n  inner_join(risco_retorno, by = \"Ativo\") %&gt;%\n  select(Ativo,Desvio, beta, Risco, Retorno)\n\nbeta_long\n\n# A tibble: 7 × 5\n  Ativo    Desvio  beta Risco Retorno\n  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;\n1 VALE3.SA 0.0950 0.620  5.78 0.0164 \n2 PETR4.SA 0.123  1.31   3.72 0.0331 \n3 CMIG4.SA 0.0988 0.985  4.99 0.0198 \n4 RADL3.SA 0.0747 0.627 14.8  0.00506\n5 ITUB4.SA 0.0951 1.06  13.0  0.00734\n6 X.BVSP   0.0737 1     17.1  0.00431\n7 CARTEIRA 0.0778 0.986  5.00 0.0156 \n\n\n\n\n\nbeta &lt;- plotly::ggplotly(ggplot(beta_long) +\n  aes(y = Retorno, x = beta, colour = Ativo) +\n  geom_point() +\n  scale_color_hue(direction = 1) +\n  labs(y = \"Retorno\", x = \"Beta\", title = \"Beta vs Retorno\") +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(size = 16L,\n    face = \"bold\",\n    hjust = 0.5)\n  ))\n\n\n\n\nbeta"
+    "text": "Beta\n\nBeta da carteira e de cada ativo.Beta vs RetornoGráfico - Beta vs Retorno\n\n\n\n# Calculando o beta do portfólio e de cada ativo\n\nbeta_long &lt;- PerformanceAnalytics::CAPM.beta(cbind(asset_returns_xts, portfolio_returns_xts), asset_returns_xts$'^BVSP', Rf = 0) %&gt;%\n  as.data.frame() %&gt;%\n  rownames_to_column(var = \"indice\") %&gt;%\n  pivot_longer(cols = -indice, names_to = \"Ativo\", values_to = \"beta\") %&gt;%\n  select(-indice) %&gt;% \n  inner_join(risco_retorno, by = \"Ativo\") %&gt;%\n  select(Ativo,Desvio, beta, Risco, Retorno)\n\nbeta_long\n\n# A tibble: 7 × 5\n  Ativo    Desvio  beta Risco Retorno\n  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;\n1 VALE3.SA 0.0950 0.620  5.78 0.0164 \n2 PETR4.SA 0.123  1.31   3.72 0.0331 \n3 CMIG4.SA 0.0988 0.985  4.99 0.0198 \n4 RADL3.SA 0.0747 0.627 14.8  0.00506\n5 ITUB4.SA 0.0951 1.06  13.0  0.00731\n6 X.BVSP   0.0737 1.00  17.1  0.00431\n7 CARTEIRA 0.0778 0.986  5.00 0.0155 \n\n\n\n\n\nbeta &lt;- plotly::ggplotly(ggplot(beta_long) +\n  aes(y = Retorno, x = beta, colour = Ativo) +\n  geom_point() +\n  scale_color_hue(direction = 1) +\n  labs(y = \"Retorno\", x = \"Beta\", title = \"Beta vs Retorno\") +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(size = 16L,\n    face = \"bold\",\n    hjust = 0.5)\n  ))\n\n\n\n\nbeta"
   },
   {
     "objectID": "apresentacao.html#indice-sharpe",
     "href": "apresentacao.html#indice-sharpe",
     "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
     "section": "Indice sharpe",
-    "text": "Indice sharpe\n\\[ SR = \\frac{R_p - R_f}{\\sigma_p}\\]\nOnde \\(R_p\\) é o retorno da carteira, \\(R_f\\) é a taxa livre de risco e \\(\\sigma_p\\) é o desvio padrão da carteira.\n\n# Calculando o índice sharpe com perfomance analytics\n\nsharpe_carteira &lt;- PerformanceAnalytics::SharpeRatio(portfolio_returns_xts, Rf = 0, p = 0.95, FUN = \"StdDev\")\n\nsharpe_ativos &lt;- PerformanceAnalytics::SharpeRatio(asset_returns_xts, Rf = 0, p = 0.95, FUN = \"StdDev\")\n\nsharpe_carteira\n\n                               CARTEIRA\nStdDev Sharpe (Rf=0%, p=95%): 0.1999524\n\nsharpe_ativos %&gt;% head()\n\n                               VALE3.SA  PETR4.SA  CMIG4.SA   RADL3.SA\nStdDev Sharpe (Rf=0%, p=95%): 0.1729673 0.2691189 0.2003738 0.06769505\n                                ITUB4.SA      ^BVSP\nStdDev Sharpe (Rf=0%, p=95%): 0.07717967 0.05850082"
+    "text": "Indice sharpe\n\\[ SR = \\frac{R_p - R_f}{\\sigma_p}\\]\nOnde \\(R_p\\) é o retorno da carteira, \\(R_f\\) é a taxa livre de risco e \\(\\sigma_p\\) é o desvio padrão da carteira.\n\n# Calculando o índice sharpe com perfomance analytics\n\nsharpe_carteira &lt;- PerformanceAnalytics::SharpeRatio(portfolio_returns_xts, Rf = 0, p = 0.95, FUN = \"StdDev\")\n\nsharpe_ativos &lt;- PerformanceAnalytics::SharpeRatio(asset_returns_xts, Rf = 0, p = 0.95, FUN = \"StdDev\")\n\nsharpe_carteira\n\n                               CARTEIRA\nStdDev Sharpe (Rf=0%, p=95%): 0.1998465\n\nsharpe_ativos %&gt;% head()\n\n                               VALE3.SA  PETR4.SA  CMIG4.SA   RADL3.SA\nStdDev Sharpe (Rf=0%, p=95%): 0.1729674 0.2691189 0.2003738 0.06769505\n                                ITUB4.SA      ^BVSP\nStdDev Sharpe (Rf=0%, p=95%): 0.07693522 0.05850082"
   },
   {
     "objectID": "apresentacao.html#exercício",
@@ -215,5 +215,96 @@
     "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
     "section": "Eduardo Camilo",
     "text": "Eduardo Camilo\n\n\n\n\n\nDoutor em Administração pelo Instituto COPPEAD da UFRJ (2009) e Professor Associado da Universidade Federal Fluminense, onde vem pesquisando nas áreas de Microestrutura de Mercado, Finanças Comportamentais e Inteligência Analítica. Graduado em Engenharia Eletrônica pelo Instituto Militar de Engenharia (1987). Possui certificação CAP® (Certified Analytics Professional). Possui experiência como executivo na área financeira de grandes empresas e consultor em Finanças e Inteligência Analítica. Também leciona nas áreas de Finanças, Métodos Quantitativos, Varejo e Informática em diversas instituições. Autor do livro Finanças Comportamentais - Pessoas Inteligentes Também Perdem Dinheiro na Bolsa de Valores, publicado pela editora Atlas em 2009."
+  },
+  {
+    "objectID": "apresentacao.html#função-de-utilidade-quadrática",
+    "href": "apresentacao.html#função-de-utilidade-quadrática",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Função de utilidade quadrática",
+    "text": "Função de utilidade quadrática\nA função de utilidade quadrática é usada na otimização de portfólios para maximizar o retorno esperado e minimizar o risco.\n\\[U = \\mu^T w - \\lambda \\sigma^2\\]\nonde: - \\(U\\): função de utilidade - \\(\\mu^T\\): vetor de retornos esperados - \\(w\\): vetor de pesos dos ativos - \\(\\lambda\\): fator de aversão ao risco\nGeneralizando para o caso de \\(n\\) ativos, a função de utilidade quadrática é dada por:\n\\[U = \\mu^T w - \\lambda w^T \\Sigma w\\]\nonde: - \\(\\Sigma\\): matriz de covariância dos retornos dos ativos - \\(w^T\\): vetor transposto de pesos dos ativos - \\(w\\): vetor de pesos dos ativos - \\(\\lambda\\): fator de aversão ao risco - \\(\\mu\\): vetor de retornos esperados - \\(U\\): função de utilidade"
+  },
+  {
+    "objectID": "apresentacao.html#otimização-de-portfólios",
+    "href": "apresentacao.html#otimização-de-portfólios",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Otimização de portfólios",
+    "text": "Otimização de portfólios\nA otimização de portfólios é um problema de maximização da função de utilidade quadrática sujeita a restrições, como a soma dos pesos dos ativos deve ser igual a 1 e os pesos dos ativos devem ser maiores ou iguais a zero."
+  },
+  {
+    "objectID": "apresentacao.html#passos-para-otimização-de-portfólios-com-o-pacote-portfolioanalytics",
+    "href": "apresentacao.html#passos-para-otimização-de-portfólios-com-o-pacote-portfolioanalytics",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Passos para otimização de portfólios com o pacote PortfolioAnalytics",
+    "text": "Passos para otimização de portfólios com o pacote PortfolioAnalytics\n\nCriar o obejto de portfólio\nAdicionar restrições\nAdicionar a função objetivo\nResolver o problema de otimização\nVisualizar os resultados\nExibir os pesos dos ativos\nPlotar a distribuição dos pesos na carteira otimizada"
+  },
+  {
+    "objectID": "apresentacao.html#exemplo-prático---criação-do-objeto-de-portfólio",
+    "href": "apresentacao.html#exemplo-prático---criação-do-objeto-de-portfólio",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Exemplo prático - Criação do objeto de portfólio",
+    "text": "Exemplo prático - Criação do objeto de portfólio\n\n# removendo bvsp da lista de ativos\n\nasset_returns_xts &lt;- asset_returns_xts[, tickers[1:5]]\n\nlibrary(PortfolioAnalytics)\n\nport_spec &lt;- portfolio.spec(assets = colnames(asset_returns_xts))\n\nclass(port_spec)\n\n[1] \"portfolio.spec\" \"portfolio\""
+  },
+  {
+    "objectID": "apresentacao.html#adicionando-restrições",
+    "href": "apresentacao.html#adicionando-restrições",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Adicionando restrições",
+    "text": "Adicionando restrições\n::: {.cell}\n# Adicionando restrições, como por exemplo, a soma dos pesos dos ativos deve ser igual a 1\n\nport_spec  &lt;- add.constraint(port_spec, type = \"weight_sum\", min_sum = 1, max_sum = 1)\n\n# adicionnando uma restrição de caixas para os pesos dos ativos\n\nport_spec &lt;- add.constraint(port_spec, type = \"box\", min = c(0.2, 0.1, 0.1, 0.1, 0.1), max = 0.4)\n\n\nport_spec\n::: {.cell-output .cell-output-stdout}\n**************************************************\nPortfolioAnalytics Portfolio Specification \n**************************************************\n\nCall:\nportfolio.spec(assets = colnames(asset_returns_xts))\n\nNumber of assets: 5 \nAsset Names\n[1] \"VALE3.SA\" \"PETR4.SA\" \"CMIG4.SA\" \"RADL3.SA\" \"ITUB4.SA\"\n\nConstraints\nEnabled constraint types\n       - weight_sum \n       - box \n::: :::"
+  },
+  {
+    "objectID": "apresentacao.html#adicionando-a-função-objetivo",
+    "href": "apresentacao.html#adicionando-a-função-objetivo",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Adicionando a função objetivo",
+    "text": "Adicionando a função objetivo\nNo portfolioAnalytics, a função objetivo é adicionada ao objeto de portfólio usando a função add.objective(). Os objetivos mais usado são:\nreturn: Maximizar o retorno esperado da carteira risk: Minimizar o risco da carteira risk_budget: Minimizar a contribuição marginal do risco de cada ativo para o risco total da carteira quadratic_utility: Maximizar a função de utilidade quadrática da carteira weight_concentration: Minimizar a concentração dos pesos dos ativos na carteira\n\n# Adiciona a função objetivo, que é maximizar o retorno médio esperado da carteira\n\nport_spec &lt;- add.objective(port_spec, type = \"return\", name = \"mean\")\n\n# Adiciona a função objetivo, que é minimizar o desvio padrão da carteira\n\nport_spec &lt;- add.objective(port_spec, type = \"risk\", name = \"StdDev\")\n\n# Adiciona um objetivo para minimizar a contribuição marginal do risco de cada ativo para o risco total da carteira\n\nport_spec &lt;- add.objective(port_spec, type = \"risk_budget\", name = \"var\", min_prisk = 0.05, max_prisk = 0.1)\n\nprint(port_spec)\n\n**************************************************\nPortfolioAnalytics Portfolio Specification \n**************************************************\n\nCall:\nportfolio.spec(assets = colnames(asset_returns_xts))\n\nNumber of assets: 5 \nAsset Names\n[1] \"VALE3.SA\" \"PETR4.SA\" \"CMIG4.SA\" \"RADL3.SA\" \"ITUB4.SA\"\n\nConstraints\nEnabled constraint types\n        - weight_sum \n        - box \n\nObjectives:\nEnabled objective names\n        - mean \n        - StdDev \n        - var"
+  },
+  {
+    "objectID": "apresentacao.html#o-problema-de-otimização",
+    "href": "apresentacao.html#o-problema-de-otimização",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "O problema de otimização",
+    "text": "O problema de otimização\nExistem duas funções principais para resolver o problema de otimização da carteira: optimize.portfolio() e optimize.portfolio.rebalancing().\nO pacote suporta diversos métodos de otimização, como:\nDEoptim: Differential Evolution random: Random Portfolios GenSA: Generalized Simulated Annealing pso: Particle Swarm Optimization ROI: R Optimization Infrastructure\nO método a ser usado irá depender do problema."
+  },
+  {
+    "objectID": "apresentacao.html#resolvendo-o-problema-de-otimização",
+    "href": "apresentacao.html#resolvendo-o-problema-de-otimização",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Resolvendo o problema de otimização",
+    "text": "Resolvendo o problema de otimização\nVamos fazer fazer uma otimização usando o método de portifolios aleatórios. Nosso objetivo é maximizar o retorno esperado da carteira e minimizar o risco onde o risco minimo é 5% e o risco maximo é 10% sujeito a restrições de peso e de grupo.\n\nrp &lt;- random_portfolios(port_spec, permutations = 1000, rp_method = 'simplex')\n\nhead(rp)\n\n      VALE3.SA  PETR4.SA  CMIG4.SA  RADL3.SA  ITUB4.SA\n[1,] 0.2410081 0.1648103 0.2115307 0.1059757 0.2766752\n[2,] 0.2599035 0.3124688 0.2154415 0.1071449 0.1050413\n[3,] 0.2056617 0.1523450 0.1287230 0.2565653 0.2567051\n[4,] 0.3595421 0.2381104 0.1106869 0.1315935 0.1600672\n[5,] 0.2128628 0.1369153 0.3246433 0.1367817 0.1887969\n[6,] 0.3652988 0.1056308 0.1370798 0.1525072 0.2394834"
+  },
+  {
+    "objectID": "apresentacao.html#resultados-da-otimização",
+    "href": "apresentacao.html#resultados-da-otimização",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Resultados da otimização",
+    "text": "Resultados da otimização\n\nopt  &lt;-  optimize.portfolio(R = asset_returns_xts, port_spec, rp = rp, optimize_method = \"random\", trace = TRUE)\n\nprint(opt)\n\n***********************************\nPortfolioAnalytics Optimization\n***********************************\n\nCall:\noptimize.portfolio(R = asset_returns_xts, portfolio = port_spec, \n    optimize_method = \"random\", trace = TRUE, rp = rp)\n\nOptimal Weights:\nVALE3.SA PETR4.SA CMIG4.SA RADL3.SA ITUB4.SA \n  0.3222   0.1031   0.1000   0.3647   0.1101 \n\nObjective Measures:\n   mean \n0.01334 \n\n\n StdDev \n0.06398 \n\ncontribution :\nVALE3.SA PETR4.SA CMIG4.SA RADL3.SA ITUB4.SA \n0.020825 0.007879 0.007320 0.020219 0.007740 \n\npct_contrib_StdDev :\nVALE3.SA PETR4.SA CMIG4.SA RADL3.SA ITUB4.SA \n  0.3255   0.1231   0.1144   0.3160   0.1210"
+  },
+  {
+    "objectID": "apresentacao.html#extraindo-os-pesos-dos-ativos",
+    "href": "apresentacao.html#extraindo-os-pesos-dos-ativos",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Extraindo os pesos dos ativos",
+    "text": "Extraindo os pesos dos ativos\n\n# extraindo os pesos para um data frame\nweights &lt;- extractWeights(opt)\n\n# Adicionando os nomes dos ativos sem colocá-los no índice\nweights &lt;- data.frame(tickers = colnames(asset_returns_xts), weights, row.names = NULL)\n\nweights\n\n   tickers   weights\n1 VALE3.SA 0.3221855\n2 PETR4.SA 0.1030775\n3 CMIG4.SA 0.1000000\n4 RADL3.SA 0.3646728\n5 ITUB4.SA 0.1100641"
+  },
+  {
+    "objectID": "apresentacao.html#distribuição-dos-pesos",
+    "href": "apresentacao.html#distribuição-dos-pesos",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Distribuição dos pesos",
+    "text": "Distribuição dos pesos\n\nggplot(weights, aes(x = reorder(tickers, weights), y = weights, fill = tickers)) +\n  geom_col(color = \"black\", show.legend = FALSE) +\n  theme_minimal(base_size = 14) +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1),\n    plot.title = element_text(hjust = 0.5, size = 20, face = \"bold\"),\n    plot.subtitle = element_text(hjust = 0.5, size = 16),\n    legend.position = \"none\") +\n  scale_fill_viridis_d() +\n  labs(title = \"Distribuição dos Pesos dos Ativos\",\n   x = \"Ativos\",\n   y = \"Pesos\") +\n  coord_flip()"
+  },
+  {
+    "objectID": "apresentacao.html#conclusão",
+    "href": "apresentacao.html#conclusão",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "Conclusão",
+    "text": "Conclusão\n\nNeste tutorial, aprendemos a importar preços de ativos da internet, transformar os preços diários em mensais e obter os retornos.\nVisualizamos os dados com ggplot2 e plotly, calculamos o retorno da carteira e visualizamos o retorno\nAnalisamos o risco dos ativos e da carteira, calculamos o beta do portfólio e de cada ativo e o índice sharpe.\nPor fim, otimizamos a carteira de ativos com o pacote PortfolioAnalytics."
+  },
+  {
+    "objectID": "apresentacao.html#e-tem-mais",
+    "href": "apresentacao.html#e-tem-mais",
+    "title": "PROCESSO DE OTIMIZAÇÃO DE UMA CARTEIRA DE ATIVOS UTILIZANDO A LINGUAGEM R",
+    "section": "E tem mais…",
+    "text": "E tem mais…"
   }
 ]

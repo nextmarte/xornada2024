@@ -24,68 +24,53 @@ execute:
 
 ## Ariel Levy
 
-::: {style="display: flex; justify-content: space-between;"}
-::: columns
+:::::: {style="display: flex; justify-content: space-between;"}
+::::: columns
 ::: {.column width="30%"}
 ![](images/Ariel.jpg)
 :::
 
 ::: {.column width="70%"}
-
 <p style="text-align: justify;">
 
 Doutor em Economia (Universidade Federal Fluminense - 2013), mestre em Administração (IBMEC -2003) e engenheiro eletricista (Universidade Federal Fluminense - 1982). Sou Professor Associado da Universidade Federal Fluminense vinculado ao Departamento de Administração da Faculdade de Administração e Ciências Contábeis e fui coordenador do Curso de Graduação em Administração (2016-2021). Professor do quadro permanente do PPGAd - UFF e colaborador no MBA de Logística (LOGEMP - UFF), no MBA de Finanças (UFF), no MBA de Marketing (UFF) e dos cursos de Extensão em Ciências dos Dados (UFF) como atual coordenador. Possui experiência em Administração, com ênfase em Finanças Quantitativas; Finanças publicas; Planejamento e Controle: Ciências dos Dados: na linguagem R e na análise e visualização de dados. Organizador dos Seminários de Estatística R - Evento Internacional de Divulgação de Aplicações e Desenvolvimento de Linguagens R. Coordenador do Grupo de Pesquisa (CNPQ/UFF) - Métodos Quantitativos Aplicados à Administração.
 
 </p>
-
-
-
 :::
-:::
-:::
+:::::
+::::::
 
 ## Marcus Ramalho
 
-::: columns
+::::: columns
 ::: {.column width="30%"}
 ![](images/Marcus.jpg)
 :::
 
 ::: {.column width="70%"}
-
-
 <p style="text-align: justify;">
 
-  Possui mestrado e graduação em Administração pela Universidade Federal Fluminense (UFF), atua como professor nos cursos de formação executiva em Ciências de Dados e Finanças Corporativas e Mercados de Capitais na mesma instituição. Paralelamente, exerce a função de cientista de dados e desenvolvedor de sistemas no projeto Lagoa Viva (UFF/Maricá, RJ). Tem experiência em ciência de dados com R e Python, programação funcional, desenvolvimento de sistemas com Django, visualização de dados e automação de processos administrativos com Python, R e VBA. Seus interesses acadêmicos e profissionais incluem Administração da Informação, Desenvolvimento de sistemas, Economia Política e Finanças, R, Python.
+Possui mestrado e graduação em Administração pela Universidade Federal Fluminense (UFF), atua como professor nos cursos de formação executiva em Ciências de Dados e Finanças Corporativas e Mercados de Capitais na mesma instituição. Paralelamente, exerce a função de cientista de dados e desenvolvedor de sistemas no projeto Lagoa Viva (UFF/Maricá, RJ). Tem experiência em ciência de dados com R e Python, programação funcional, desenvolvimento de sistemas com Django, visualização de dados e automação de processos administrativos com Python, R e VBA. Seus interesses acadêmicos e profissionais incluem Administração da Informação, Desenvolvimento de sistemas, Economia Política e Finanças, R, Python.
 
 </p>
-
 :::
-:::
+:::::
 
 ## Eduardo Camilo
 
-::: columns
+::::: columns
 ::: {.column width="30%"}
 ![](images/camilo.png)
 :::
 
-::: {.column width="70%}
-
+::: {.column width="\"70%"}
 <p style="text-align: justify;">
 
 Doutor em Administração pelo Instituto COPPEAD da UFRJ (2009) e Professor Associado da Universidade Federal Fluminense, onde vem pesquisando nas áreas de Microestrutura de Mercado, Finanças Comportamentais e Inteligência Analítica. Graduado em Engenharia Eletrônica pelo Instituto Militar de Engenharia (1987). Possui certificação CAP® (Certified Analytics Professional). Possui experiência como executivo na área financeira de grandes empresas e consultor em Finanças e Inteligência Analítica. Também leciona nas áreas de Finanças, Métodos Quantitativos, Varejo e Informática em diversas instituições. Autor do livro Finanças Comportamentais - Pessoas Inteligentes Também Perdem Dinheiro na Bolsa de Valores, publicado pela editora Atlas em 2009.
 
 </p>
-
 :::
-
-:::
-
-
-
-
-
+:::::
 
 ## Sumário
 
@@ -108,7 +93,6 @@ Doutor em Administração pelo Instituto COPPEAD da UFRJ (2009) e Professor Asso
 9.  Índice sharpe
 
 10. Otmização de carteiras de ativos
-
 
 ## Relembrando conceitos de finanças
 
@@ -138,7 +122,7 @@ Doutor em Administração pelo Instituto COPPEAD da UFRJ (2009) e Professor Asso
 
 ## Importar os preços dos ativos da internet direto do yahoo.com
 
-::: panel-tabset
+:::: panel-tabset
 ## Fundamentus
 
 <div>
@@ -189,14 +173,13 @@ prices %>%
   tk_tbl() %>%
   head()
 ```
-:::
+::::
 
 ## Retornos de um ativo
 
 Retorno Linear = $\frac{P_{t} - P_{t-1}}{P_{t-1}}$
 
 Retorno Logarítmico = $ln(\frac{P_{t}}{P_{t-1}})$
-
 
 ## Transformar os preços diários em mensais e obter os retornos.
 
@@ -367,8 +350,6 @@ head(portfolio_returns_xts,3)
 ```
 :::
 
-
-
 ## Visualizar o retorno da carteira.
 
 ::: panel-tabset
@@ -436,8 +417,7 @@ ggplotly(comp_mkt)
 
 ## Análise do risco.
 
-::: panel-tabset
-
+:::::: panel-tabset
 ## Desvio padrão
 
 $$\bar{X}=\sum_{i=1}^n{\pi_iX_i}$$
@@ -478,7 +458,6 @@ distribuicaodp <- plotly::ggplotly(asset_returns_tbl %>%
 
 ```
 
-
 ## Distribuição padronizada
 
 ```{r}
@@ -488,16 +467,14 @@ distribuicaodp
 
 ## Risco do ativo
 
-::: {.columns}
-
-::: {.column}
-
+::::: columns
+::: column
 $$ CV= \frac{\sigma}{\bar{K}}$$
 
 ![](images/paste-1.png){width="505"}
 :::
-::: {.column}
 
+::: column
 ```{r}
 
 # Cria o data frame risco_retorno
@@ -527,23 +504,20 @@ rr <- plotly::ggplotly(risco_retorno %>%
   theme(plot.title = element_text(size = 16L, face = "bold", hjust = 0.5)))
 
 ```
-
 :::
-::: 
+:::::
 
-## Risco vs Retorno 
+## Risco vs Retorno
 
 ```{r}
 #| echo: false
 rr
 ```
-
-:::
+::::::
 
 ## Beta
 
 ::: panel-tabset
-
 ## Beta da carteira e de cada ativo.
 
 ```{r}
@@ -582,7 +556,6 @@ beta <- plotly::ggplotly(ggplot(beta_long) +
 ```{r}
 beta
 ```
-
 :::
 
 ## Indice sharpe
@@ -610,24 +583,13 @@ A função de utilidade quadrática é usada na otimização de portfólios para
 
 $$U = \mu^T w - \lambda \sigma^2$$
 
-onde:
-- $U$: função de utilidade
-- $\mu^T$: vetor de retornos esperados
-- $w$: vetor de pesos dos ativos
-- $\lambda$: fator de aversão ao risco
+onde: - $U$: função de utilidade - $\mu^T$: vetor de retornos esperados - $w$: vetor de pesos dos ativos - $\lambda$: fator de aversão ao risco
 
 Generalizando para o caso de $n$ ativos, a função de utilidade quadrática é dada por:
 
 $$U = \mu^T w - \lambda w^T \Sigma w$$
 
-onde:
-- $\Sigma$: matriz de covariância dos retornos dos ativos
-- $w^T$: vetor transposto de pesos dos ativos
-- $w$: vetor de pesos dos ativos
-- $\lambda$: fator de aversão ao risco
-- $\mu$: vetor de retornos esperados
-- $U$: função de utilidade
-
+onde: - $\Sigma$: matriz de covariância dos retornos dos ativos - $w^T$: vetor transposto de pesos dos ativos - $w$: vetor de pesos dos ativos - $\lambda$: fator de aversão ao risco - $\mu$: vetor de retornos esperados - $U$: função de utilidade
 
 ## Otimização de portfólios
 
@@ -635,17 +597,21 @@ A otimização de portfólios é um problema de maximização da função de uti
 
 ## Passos para otimização de portfólios com o pacote PortfolioAnalytics
 
-1. Criar o obejto de portfólio
-2. Adicionar restrições
-3. Adicionar a função objetivo
-4. Resolver o problema de otimização
-5. Visualizar os resultados
-6. Exibir os pesos dos ativos
-7. Plotar a distribuição dos pesos na carteira otimizada
+1.  Criar o obejto de portfólio
+2.  Adicionar restrições
+3.  Adicionar a função objetivo
+4.  Resolver o problema de otimização
+5.  Visualizar os resultados
+6.  Exibir os pesos dos ativos
+7.  Plotar a distribuição dos pesos na carteira otimizada
 
 ## Exemplo prático - Criação do objeto de portfólio
 
 ```{r}
+# removendo bvsp da lista de ativos
+
+asset_returns_xts <- asset_returns_xts[, tickers[1:5]]
+
 library(PortfolioAnalytics)
 
 port_spec <- portfolio.spec(assets = colnames(asset_returns_xts))
@@ -656,9 +622,9 @@ class(port_spec)
 
 ## Adicionando restrições
 
- ```{r}
- 
- # Adicionando restrições, como por exemplo, a soma dos pesos dos ativos deve ser igual a 1
+```{r}
+
+# Adicionando restrições, como por exemplo, a soma dos pesos dos ativos deve ser igual a 1
 
 port_spec  <- add.constraint(port_spec, type = "weight_sum", min_sum = 1, max_sum = 1)
 
@@ -668,22 +634,131 @@ port_spec <- add.constraint(port_spec, type = "box", min = c(0.2, 0.1, 0.1, 0.1,
 
 
 port_spec
- 
- ```
+
+```
+
+## Adicionando a função objetivo
+
+No portfolioAnalytics, a função objetivo é adicionada ao objeto de portfólio usando a função add.objective(). Os objetivos mais usado são:
+
+**return**: Maximizar o retorno esperado da carteira **risk**: Minimizar o risco da carteira **risk_budget**: Minimizar a contribuição marginal do risco de cada ativo para o risco total da carteira **quadratic_utility**: Maximizar a função de utilidade quadrática da carteira **weight_concentration**: Minimizar a concentração dos pesos dos ativos na carteira
+
+```{r}
+# Adiciona a função objetivo, que é maximizar o retorno médio esperado da carteira
+
+port_spec <- add.objective(port_spec, type = "return", name = "mean")
+
+# Adiciona a função objetivo, que é minimizar o desvio padrão da carteira
+
+port_spec <- add.objective(port_spec, type = "risk", name = "StdDev")
+
+# Adiciona um objetivo para minimizar a contribuição marginal do risco de cada ativo para o risco total da carteira
+
+port_spec <- add.objective(port_spec, type = "risk_budget", name = "var", min_prisk = 0.05, max_prisk = 0.1)
+
+print(port_spec)
+```
+
+## O problema de otimização
+
+Existem duas funções principais para resolver o problema de otimização da carteira: optimize.portfolio() e optimize.portfolio.rebalancing().
+
+O pacote suporta diversos métodos de otimização, como:
+
+**DEoptim**: Differential Evolution **random**: Random Portfolios **GenSA**: Generalized Simulated Annealing **pso**: Particle Swarm Optimization **ROI**: R Optimization Infrastructure
+
+O método a ser usado irá depender do problema.
+
+## Resolvendo o problema de otimização
+
+Vamos fazer fazer uma otimização usando o método de portifolios aleatórios. Nosso objetivo é maximizar o retorno esperado da carteira e minimizar o risco onde o risco minimo é 5% e o risco maximo é 10% sujeito a restrições de peso e de grupo.
+
+```{r}
+rp <- random_portfolios(port_spec, permutations = 1000, rp_method = 'simplex')
+
+head(rp)
+```
+
+## Resultados da otimização
+
+```{r}
+opt  <-  optimize.portfolio(R = asset_returns_xts, port_spec, rp = rp, optimize_method = "random", trace = TRUE)
+
+print(opt)
+```
+
+## Extraindo os pesos dos ativos
+
+```{r}
+# extraindo os pesos para um data frame
+weights <- extractWeights(opt)
+
+# Adicionando os nomes dos ativos sem colocá-los no índice
+weights <- data.frame(tickers = colnames(asset_returns_xts), weights, row.names = NULL)
+
+weights
+
+
+
+```
+
+## Distribuição dos pesos
+
+```{r}
+ggplot(weights, aes(x = reorder(tickers, weights), y = weights, fill = tickers)) +
+  geom_col(color = "black", show.legend = FALSE) +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+    plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 16),
+    legend.position = "none") +
+  scale_fill_viridis_d() +
+  labs(title = "Distribuição dos Pesos dos Ativos",
+   x = "Ativos",
+   y = "Pesos") +
+  coord_flip()
+```
+
+## Conclusão
+
+-   Neste tutorial, aprendemos a importar preços de ativos da internet, transformar os preços diários em mensais e obter os retornos.
+
+-   Visualizamos os dados com ggplot2 e plotly, calculamos o retorno da carteira e visualizamos o retorno
+
+-   Analisamos o risco dos ativos e da carteira, calculamos o beta do portfólio e de cada ativo e o índice sharpe.
+
+-   Por fim, otimizamos a carteira de ativos com o pacote PortfolioAnalytics.
+
+## E tem mais... SER 2025
+
+![](images/paste-2.png)
+
+## E tem mais coisa ainda... 
+
+::: {.columns}
+
+::: {.column}
+![](images/paste-3.png){width="454"}
+:::
+
+::: {.column}
+![](images/paste-4.png){width="454"}
+:::
+
+::: 
+
 
 ## Contato
 
 -   Marcus Ramalho:
     -   [GitHub](https://github.com/nextmarte)
-    -   E-mail: marcusantonio@id.uff.br
+    -   E-mail: marcusantonio\@id.uff.br
     -   linkedin: [Marcus Ramalho](https://www.linkedin.com/in/marcus-ramalho-8a440545/)
-
 -   Ariel Levy:
     -   [GitHub](https://github.com/alevy59)
-    -   E-mail: alevy@id.uff.br
+    -   E-mail: alevy\@id.uff.br
     -   linkedin: [Ariel Levy](https://www.linkedin.com/in/ariel-levy-3623136/)
-
--  Eduardo Camilo:
+-   Eduardo Camilo:
     -   [GitHub](https://github.com/eduardo-camilo)
-    -   E-mail: ecamilo@id.uff.br
-    -  linkedin: [Eduardo Camilo](https://www.linkedin.com/in/eduardo-camilo-da-silva-dsc-cap%C2%AE-a9801416/?originalSubdomain=br)
+    -   E-mail: ecamilo\@id.uff.br
+    -   linkedin: [Eduardo Camilo](https://www.linkedin.com/in/eduardo-camilo-da-silva-dsc-cap%C2%AE-a9801416/?originalSubdomain=br)
